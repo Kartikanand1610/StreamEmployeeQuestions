@@ -5,6 +5,8 @@ import java.security.KeyStore;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.spi.ToolProvider.findFirst;
+
 /**
  * Hello world!
  *
@@ -73,8 +75,50 @@ public class App
         System.out.println("   ");
 
        //Question8-> Get the details of youngest male employee in the product development department?
+        Optional<Employee> youngestMaleEmployeeInProductDevelopmentWrapper=
+                employeeList.stream()
+                        .filter(e -> e.getGender()=="Male" && e.getDepartment()=="Product Development")
+                        .min(Comparator.comparingInt(Employee::getAge));
 
+        Employee youngestMaleEmployeeInProductDevelopment = youngestMaleEmployeeInProductDevelopmentWrapper.get();
 
+        System.out.println("Details Of Youngest Male Employee In Product Development");
+
+        System.out.println("----------------------------------------------");
+
+        System.out.println("ID : "+youngestMaleEmployeeInProductDevelopment.getId());
+
+        System.out.println("Name : "+youngestMaleEmployeeInProductDevelopment.getName());
+
+        System.out.println("Age : "+youngestMaleEmployeeInProductDevelopment.getAge());
+
+        System.out.println("Year Of Joinging : "+youngestMaleEmployeeInProductDevelopment.getYearOfJoining());
+
+        System.out.println("Salary : "+youngestMaleEmployeeInProductDevelopment.getSalary());
+
+        //Question9-> Who has the most working experience in the organization?
+        Optional<Employee> seniorMostEmployeeWrapper=
+                employeeList.stream().sorted(Comparator.comparingInt(Employee::getYearOfJoining)).findFirst();
+
+        Employee seniorMostEmployee = seniorMostEmployeeWrapper.get();
+
+        System.out.println("Senior Most Employee Details :");
+
+        System.out.println("----------------------------");
+
+        System.out.println("ID : "+seniorMostEmployee.getId());
+
+        System.out.println("Name : "+seniorMostEmployee.getName());
+
+        System.out.println("Age : "+seniorMostEmployee.getAge());
+
+        System.out.println("Gender : "+seniorMostEmployee.getGender());
+
+        System.out.println("Age : "+seniorMostEmployee.getDepartment());
+
+        System.out.println("Year Of Joinging : "+seniorMostEmployee.getYearOfJoining());
+
+        System.out.println("Salary : "+seniorMostEmployee.getSalary());
 
     }
 }
