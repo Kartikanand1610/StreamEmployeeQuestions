@@ -172,6 +172,14 @@ public class App
         }
 
        //Question15->  Who is the oldest employee in the organization? What is his age and which department he belongs to?
+        Optional<Employee> oldestEmp=employeeList.stream().max(Comparator.comparing(Employee::getAge));
+        Employee old=oldestEmp.get();
+        System.out.println("----------------------------");
+        System.out.println("Employee with max age"+" "+old.getAge());
+        System.out.println("His name"+" "+old.getName());
+        System.out.println("His department"+" "+old.getDepartment());
+        System.out.println("----------------------------");
+
 
     }
 }
